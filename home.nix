@@ -8,14 +8,13 @@
     enable = true;
     shellAliases = {
       btw = "echo i use nixos btw ";
+      nrs = "sudo nixos-rebuild switch ";
     };
   };
-
-  home.packages = with pkgs; [
-    gnome-tweaks
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.blur-my-shell
-
+  programs.gnome-shell.enable = true;
+  programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [
+    dash-to-dock
+    blur-my-shell
   ];
   programs.dconf.enable = true;
   dconf.settings = {

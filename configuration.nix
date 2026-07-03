@@ -120,6 +120,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   programs.fish.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."andre" = {
     isNormalUser = true;
@@ -159,6 +160,7 @@
     spotify
     kdePackages.kate
     zen-browser.packages.${pkgs.system}.default
+
     zed-editor
     fish
     kitty
@@ -171,6 +173,8 @@
     discord
     #----------------
     fastfetch
+
+    faugus-launcher
   ];
   #neo vim
   #gaming
@@ -188,6 +192,7 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
