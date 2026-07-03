@@ -158,7 +158,6 @@
     #language server
     nil # für Nix
     spotify
-    kdePackages.kate
     zen-browser.packages.${pkgs.system}.default
 
     zed-editor

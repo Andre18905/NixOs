@@ -11,12 +11,9 @@
       nrs = "sudo nixos-rebuild switch ";
     };
   };
-  programs.gnome-shell.enable = true;
-  programs.gnome-shell.extensions = with pkgs.gnomeExtensions; [
-    dash-to-dock
-    blur-my-shell
-  ];
-  programs.dconf.enable = true;
+
+  dconf.enable = true;
+
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -27,5 +24,9 @@
       button-layout = "appmenu:minimize,close";
     };
   };
+  home.packages = with pkgs; [
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.blur-my-shell
+  ];
 
 }
