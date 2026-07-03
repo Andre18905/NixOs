@@ -16,10 +16,6 @@
 
   ];
 
-  home-manager.useUserPackages = true;
-  home-manager.useGlobalPkgs = true;
-  home-manager.backupFileExtension = "backup";
-  home-manager.users.andre = import ./home.nix;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics.enable = true;
@@ -87,6 +83,7 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
+
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
@@ -171,6 +168,7 @@
     faugus-launcher
     steam
     protonplus
+    discord
     #----------------
     fastfetch
   ];
