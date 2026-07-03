@@ -8,7 +8,7 @@
     enable = true;
     shellAliases = {
       btw = "echo i use nixos btw ";
-      nrs = "sudo nixos-rebuild switch ";
+      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
     };
   };
 
