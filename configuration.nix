@@ -2,14 +2,24 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, zen-browser, ... }:
+{
+  config,
+  pkgs,
+  zen-browser,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-	 
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+
+  ];
+
+  home-manager.useUserPackages = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.backupFileExtension = "backup";
+  home-manager.users.andre = import ./home.nix;
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics.enable = true;
@@ -22,19 +32,21 @@
   #sudoedit soll nvim sein hex hex
 
   environment.variables = {
-  EDITOR = "nvim";
-  VISUAL = "nvim";
-  SUDO_EDITOR = "nvim";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+    SUDO_EDITOR = "nvim";
   };
   security.sudo.extraConfig = ''
-  Defaults env_reset
-  Defaults env_keep += "EDITOR VISUAL SUDO_EDITOR"
-  Defaults editor=/run/current-system/sw/bin/nvim
+    Defaults env_reset
+    Defaults env_keep += "EDITOR VISUAL SUDO_EDITOR"
+    Defaults editor=/run/current-system/sw/bin/nvim
   '';
 
-
   #Expremientel wie flakes und nix-commands
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -52,7 +64,6 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
- 
 
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
@@ -91,8 +102,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   #Enable securyt poltkit für root recht in kate
-	 security.polkit.enable = true;
-
+  security.polkit.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -112,15 +122,18 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  programs.fish.enable =true;
+  programs.fish.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."andre" = {
     isNormalUser = true;
     description = "andre";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     shell = pkgs.fish;
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -129,44 +142,42 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
-  
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wge
-   git
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wge
+    git
 
-  #neovim confi sachen
-   neovim
-   vimPlugins.LazyVim
-   gcc #syntax hightling
-   ripgrep 
-   fd
-   tree-sitter
-   #language server
-   nil # für Nix 
-   spotify
-   kdePackages.kate
-   zen-browser.packages.${pkgs.system}.default
-   zed-editor
-   fish
-   kitty
-   bitwarden-cli
-   mission-center
-   #gaming
-   faugus-launcher
-   steam
-   protonplus
-   #----------------
-   fastfetch
+    #neovim confi sachen
+    neovim
+    vimPlugins.LazyVim
+    gcc # syntax hightling
+    ripgrep
+    fd
+    tree-sitter
+    #language server
+    nil # für Nix
+    spotify
+    kdePackages.kate
+    zen-browser.packages.${pkgs.system}.default
+    zed-editor
+    fish
+    kitty
+    bitwarden-cli
+    mission-center
+    #gaming
+    faugus-launcher
+    steam
+    protonplus
+    #----------------
+    fastfetch
   ];
-  #neo vim 
-  #gaming 
-  programs.steam.enable =true ;
-  
+  #neo vim
+  #gaming
+  programs.steam.enable = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
