@@ -178,6 +178,7 @@
     discord
     mangohud
     gamescope
+    wowup-cf
 
     #----------------
     fastfetch
