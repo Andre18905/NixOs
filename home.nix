@@ -9,6 +9,11 @@
     shellAliases = {
       btw = "echo i use nixos btw ";
       nrs = "sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
+
+
+      update-all = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .";
+
+
     };
   };
 
@@ -19,14 +24,20 @@
       color-scheme = "prefer-dark";
 
     };
-
+    "org/gnome/desktop/interface" = {
+       icon-theme = "kora";
+    };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,close";
     };
   };
   home.packages = with pkgs; [
-    gnomeExtensions.dash-to-dock
+    gnomeExtensions.dash-to-panel
     gnomeExtensions.blur-my-shell
+    gnomeExtensions.quick-settings-tweaker
+    gnomeExtensions.quick-settings-audio-panel
+    kora-icon-theme
   ];
+
 
 }

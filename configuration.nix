@@ -17,26 +17,32 @@
   ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
-
+  #wenn das spiel schlecht geht dann warten bus shader geladen sind DXVK_HUD=full dammit kann man das schauen
   hardware.graphics.enable = true;
-
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia = {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
+    powerManagement.enable = false;
   };
-  #sudoedit soll nvim sein hex hex
+  boot.kernelParams = [
+   # "nvidia.NVreg_EnableGpuFirmware=0"
+    "nvidia-drm.modeset=1"             # Essentiell für Wayland/NVIDIA
+     "nvidia_drm.fbdev=1"               # Hilft oft bei Rucklern unter GNOME
 
-  environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
-    SUDO_EDITOR = "nvim";
+  ];
+  services.power-profiles-daemon.enable = true;
+  systemd.services.set-performance-mode = {
+    description = "Set power profile to performance";
+    wantedBy = ["multi-user.target"];
+    after = ["power-profiles-daemon.service"];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance";
+    };
   };
-  security.sudo.extraConfig = ''
-    Defaults env_reset
-    Defaults env_keep += "EDITOR VISUAL SUDO_EDITOR"
-    Defaults editor=/run/current-system/sw/bin/nvim
-  '';
+  hardware.cpu.amd.updateMicrocode = true;
 
   #Expremientel wie flakes und nix-commands
   nix.settings.experimental-features = [
@@ -147,7 +153,7 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wge
     git
-
+    python3
     #neovim confi sachen
     neovim
     vimPlugins.LazyVim
@@ -156,7 +162,7 @@
     fd
     tree-sitter
     #language server
-    nil # für Nix
+    #nil # für Nix
     spotify
     zen-browser.packages.${pkgs.system}.default
 
@@ -170,14 +176,19 @@
     steam
     protonplus
     discord
+    mangohud
+    gamescope
+
     #----------------
     fastfetch
 
-    faugus-launcher
+
   ];
   #neo vim
   #gaming
+  programs.nix-ld.enable = true;
   programs.steam.enable = true;
+  programs.gamemode.enable =true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
