@@ -22,7 +22,7 @@
       font_size= 13;
       hide_window_decorations = true;
 
-      background_opacity = "0.6";           # Transparenz (0.0 bis 1.0)
+      background_opacity = "0.8";           # Transparenz (0.0 bis 1.0)
           dynamic_background_opacity = true;    # Erlaubt dynamische Änderung
           background_blur = 5;                  # Der Unschärfe-Grad (je nach Compositor)
           window_padding_width = 15;            # Mehr Platz für den "Glas"-Effekt

@@ -164,7 +164,7 @@
     #language server
     #nil # für Nix
     spotify
-    zen-browser.packages.${pkgs.system}.default
+    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     zed-editor
     fish
