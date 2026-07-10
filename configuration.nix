@@ -40,14 +40,18 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
   };
-  boot.kernelParams = [
+
    # "nvidia.NVreg_EnableGpuFirmware=0"
-    "nvidia-drm.modeset=1"             # Essentiell für Wayland/NVIDIA
-    "nvidia_drm.fbdev=1"               # Hilft oft bei Rucklern unter GNOME
-    "usbcore.autosuspend=-1"           # usb richtig machen
-  ];
+   boot.kernelParams = [
+     "mem_sleep_default=s2idle"
+     "nvidia-drm.modeset=1"
+     "nvidia_drm.fbdev=1"
+     "usbcore.autosuspend=-1"
+   ];
+
   services.power-profiles-daemon.enable = true;
   systemd.services.set-performance-mode = {
     description = "Set power profile to performance";
