@@ -99,6 +99,9 @@
     "org/gnome/desktop/wm/keybindings" = {
        close = [ "<Super>q" ]; # Fenster schließen
     };
+     "org/gnome/desktop/peripherals/mouse" = {
+    natural-scroll = true;
+    };
     #---------------------------------------------------------
     #
     #                     Blur my shell
