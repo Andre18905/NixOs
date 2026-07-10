@@ -6,6 +6,7 @@
   config,
   pkgs,
   zen-browser,
+  lib,
   ...
 }:
 
@@ -15,6 +16,21 @@
     ./hardware-configuration.nix
 
   ];
+  #Ram config
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8192;
+    }
+  ];
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
   #wenn das spiel schlecht geht dann warten bus shader geladen sind DXVK_HUD=full dammit kann man das schauen
@@ -29,8 +45,8 @@
   boot.kernelParams = [
    # "nvidia.NVreg_EnableGpuFirmware=0"
     "nvidia-drm.modeset=1"             # Essentiell für Wayland/NVIDIA
-     "nvidia_drm.fbdev=1"               # Hilft oft bei Rucklern unter GNOME
-
+    "nvidia_drm.fbdev=1"               # Hilft oft bei Rucklern unter GNOME
+    "usbcore.autosuspend=-1"           # usb richtig machen
   ];
   services.power-profiles-daemon.enable = true;
   systemd.services.set-performance-mode = {
@@ -56,6 +72,7 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
+
 
   networking.hostName = "nixos-btw"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -92,6 +109,10 @@
 
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
+  programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -166,6 +187,7 @@
     spotify
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
 
+    gnome-tweaks
     zed-editor
     fish
     kitty

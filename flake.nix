@@ -8,8 +8,12 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hanabi-src = {
+      url = "github:jeffshee/gnome-ext-hanabi";
+      flake = false;
+    };
   };
-
+ #hababie ist live background
   outputs =
     {
       self,
