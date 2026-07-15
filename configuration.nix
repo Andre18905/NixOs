@@ -181,6 +181,7 @@
     packages = [
       "com.discordapp.Discord"
       "it.mijorus.gearlever"
+      "org.onlyoffice.desktopeditors"
     ];
   };
 
@@ -219,10 +220,9 @@
     mysql-workbench
 
     #gnome
-    gnome-software
+
     #für flatpak
-    fuse
-    fuse3
+
     appimage-run
     spotify
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -240,7 +240,7 @@
     #discord
     mangohud
     gamescope
-    wowup-cf
+    # cured forge als app img
 
     #----------------
     fastfetch
