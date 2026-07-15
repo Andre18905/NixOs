@@ -1,4 +1,9 @@
-{ config, pkgs, lib ,... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   home.username = "andre";
@@ -14,43 +19,46 @@
     interactiveShellInit = ''
       set -g fish_greeting "" # Schaltet die Begrüßung aus
       fastfetch
-      '';
+    '';
   };
   programs.kitty = lib.mkForce {
     enable = true;
     settings = {
-      font_size= 13;
+      font_size = 13;
       hide_window_decorations = true;
 
-      background_opacity = "0.8";           # Transparenz (0.0 bis 1.0)
-          dynamic_background_opacity = true;    # Erlaubt dynamische Änderung
-          background_blur = 5;                  # Der Unschärfe-Grad (je nach Compositor)
-          window_padding_width = 15;            # Mehr Platz für den "Glas"-Effekt
+      background_opacity = "0.8"; # Transparenz (0.0 bis 1.0)
+      dynamic_background_opacity = true; # Erlaubt dynamische Änderung
+      background_blur = 5; # Der Unschärfe-Grad (je nach Compositor)
+      window_padding_width = 15; # Mehr Platz für den "Glas"-Effekt
 
-          # Farbschema passend zum Glas-Look (hell/dunkel mit Pastell)
-          background = "#1a1b26";
-          foreground = "#c0caf5";
+      # Farbschema passend zum Glas-Look (hell/dunkel mit Pastell)
+      background = "#1a1b26";
+      foreground = "#c0caf5";
     };
   };
 
-  programs.fastfetch={
-    enable=true;
+  programs.fastfetch = {
+    enable = true;
     settings = {
       display = {
         separator = ": ";
       };
       logo = {
-         source = "nixos_medium";
-         padding = {
-           right = 1;
-      };
+        source = "nixos_medium";
+        padding = {
+          right = 1;
+        };
       };
       modules = [
         "title"
         "separator"
 
         # --- Software / System ---
-        { type = "custom"; format = "{#91}SOFTWARE"; } # Farbige Überschrift (Blau)
+        {
+          type = "custom";
+          format = "{#91}SOFTWARE";
+        } # Farbige Überschrift (Blau)
         "os"
         {
           type = "command";
@@ -64,7 +72,10 @@
         "packages"
         "break" # Leerzeile
         # --- Hardware ---
-        { type = "custom"; format = "{#92}HARDWARE"; } # Farbige Überschrift (Grün)
+        {
+          type = "custom";
+          format = "{#92}HARDWARE";
+        } # Farbige Überschrift (Grün)
         "cpu"
         "gpu"
         "memory"
@@ -82,7 +93,6 @@
     kora-icon-theme
   ];
 
-
   dconf.enable = true;
 
   dconf.settings = {
@@ -91,16 +101,16 @@
 
     };
     "org/gnome/desktop/interface" = {
-       icon-theme = "kora";
+      icon-theme = "kora";
     };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,close";
     };
     "org/gnome/desktop/wm/keybindings" = {
-       close = [ "<Super>q" ]; # Fenster schließen
+      close = [ "<Super>q" ]; # Fenster schließen
     };
-     "org/gnome/desktop/peripherals/mouse" = {
-    natural-scroll = true;
+    "org/gnome/desktop/peripherals/mouse" = {
+      natural-scroll = true;
     };
     #---------------------------------------------------------
     #
@@ -216,10 +226,6 @@
       trans-use-dynamic-opacity = false;
       window-preview-title-position = "TOP";
     };
-
-
-
-
 
   };
   home.pointerCursor = {

@@ -25,11 +25,11 @@
   swapDevices = [
     {
       device = "/swapfile";
-      size = 8192;
+      size = 8192 * 2;
     }
   ];
   boot.kernel.sysctl = {
-    "vm.swappiness" = 10;
+    "vm.swappiness" = 100;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -44,19 +44,19 @@
     powerManagement.finegrained = false;
   };
 
-   # "nvidia.NVreg_EnableGpuFirmware=0"
-   boot.kernelParams = [
-     "mem_sleep_default=s2idle"
-     "nvidia-drm.modeset=1"
-     "nvidia_drm.fbdev=1"
-     "usbcore.autosuspend=-1"
-   ];
+  # "nvidia.NVreg_EnableGpuFirmware=0"
+  boot.kernelParams = [
+    "mem_sleep_default=s2idle"
+    "nvidia-drm.modeset=1"
+    "nvidia_drm.fbdev=1"
+    "usbcore.autosuspend=-1"
+  ];
 
   services.power-profiles-daemon.enable = true;
   systemd.services.set-performance-mode = {
     description = "Set power profile to performance";
-    wantedBy = ["multi-user.target"];
-    after = ["power-profiles-daemon.service"];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "power-profiles-daemon.service" ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance";
@@ -76,7 +76,6 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
 
   networking.hostName = "nixos-btw"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -115,8 +114,6 @@
   services.desktopManager.gnome.enable = true;
 
   programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
-
-
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -161,16 +158,45 @@
       "wheel"
     ];
     shell = pkgs.fish;
-    packages = with pkgs; [
+    packages = [
       #  thunderbird
     ];
   };
 
   # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  services.flatpak = {
+    enable = true;
+
+    remotes = [
+      {
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      }
+    ];
+
+    packages = [
+      "com.discordapp.Discord"
+      "it.mijorus.gearlever"
+      "org.onlyoffice.desktopeditors"
+    ];
+  };
+
+  #my Sql
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql84;
+  };
+  #aktiver appimages
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  programs.fuse.userAllowOther = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -187,10 +213,20 @@
     fd
     tree-sitter
     #language server
-    #nil # für Nix
+    nil # für Nix
+    nixd
+    #uni
+    remnote
+    mysql-workbench
+
+    #gnome
+
+    #für flatpak
+
+    appimage-run
     spotify
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-
+    localsend
     gnome-tweaks
     zed-editor
     fish
@@ -201,21 +237,20 @@
     faugus-launcher
     steam
     protonplus
-    discord
+    #discord
     mangohud
     gamescope
-    wowup-cf
+    # cured forge als app img
 
     #----------------
     fastfetch
-
 
   ];
   #neo vim
   #gaming
   programs.nix-ld.enable = true;
   programs.steam.enable = true;
-  programs.gamemode.enable =true;
+  programs.gamemode.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -236,7 +271,10 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
+  networking.firewall = {
+    allowedTCPPorts = [ 53317 ];
+    allowedUDPPorts = [ 53317 ];
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
