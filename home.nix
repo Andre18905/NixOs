@@ -13,8 +13,8 @@
     enable = true;
     shellAliases = {
       btw = "echo i use nixos btw ";
-      nrs = "sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
-      update-all = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild switch --flake .";
+      nrs = "sudo nixos-rebuild build --flake /etc/nixos#nixos-btw && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
+      update-all = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild build --flake . && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake .";
     };
     interactiveShellInit = ''
       set -g fish_greeting "" # Schaltet die Begrüßung aus
@@ -236,4 +236,91 @@
     name = "vimix-cursors";
     size = 24;
   };
+  programs.waybar = {
+    enable = true;
+
+    settings = {
+      mainBar = {
+        layer = "top";
+        position = "top";
+        height = 36;
+        spacing = 8;
+
+        modules-left = [
+          "hyprland/workspaces"
+        ];
+
+        modules-center = [
+          "clock"
+        ];
+
+        modules-right = [
+          "pulseaudio"
+          "network"
+          "battery"
+          "tray"
+        ];
+
+        clock = {
+          format = "{:%H:%M}";
+        };
+
+        network = {
+          format-wifi = "  {signalStrength}%";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰖪";
+        };
+
+        battery = {
+          format = "{capacity}% ";
+          format-charging = " {capacity}%";
+        };
+
+        pulseaudio = {
+          format = "{volume}% ";
+          format-muted = "󰝟";
+        };
+
+        tray = {
+          spacing = 10;
+        };
+      };
+    };
+
+    style = ''
+      * {
+        border: none;
+        border-radius: 10px;
+        font-family: "JetBrainsMono Nerd Font";
+        font-size: 14px;
+      }
+
+      window#waybar {
+        background: rgba(30, 30, 30, 0.45);
+        color: white;
+      }
+
+      #workspaces button {
+        padding: 0 10px;
+        color: #ddd;
+        background: transparent;
+      }
+
+      #workspaces button.active {
+        background: rgba(255,255,255,0.15);
+      }
+
+      #clock,
+      #network,
+      #battery,
+      #pulseaudio,
+      #tray {
+        background: rgba(255,255,255,0.08);
+        padding: 0 12px;
+        margin: 6px 4px;
+        border-radius: 10px;
+      }
+    '';
+  };
+
 }

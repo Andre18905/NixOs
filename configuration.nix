@@ -109,6 +109,17 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
 
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
@@ -218,6 +229,8 @@
     #uni
     remnote
     mysql-workbench
+    jetbrains.webstorm
+    jetbrains.pycharm
 
     #gnome
 
@@ -241,10 +254,19 @@
     mangohud
     gamescope
     # cured forge als app img
-
+    nvd # Nix Version Diff
     #----------------
     fastfetch
 
+    #Hyprland
+    waybar
+    rofi
+    hyprpaper
+    hyprlock
+    hypridle
+    #fonts
+    nerd-fonts.jetbrains-mono
+    font-awesome
   ];
   #neo vim
   #gaming
