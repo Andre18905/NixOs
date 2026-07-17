@@ -251,7 +251,7 @@
     steam
     protonplus
     #discord
-    mangohud
+
     gamescope
     # cured forge als app img
     nvd # Nix Version Diff
