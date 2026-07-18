@@ -69,6 +69,11 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings = {
+    max-jobs = "auto";
+    cores = 0;
+    max-substitution-jobs = 16;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -215,14 +220,9 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wge
     git
-    python3
+
     #neovim confi sachen
     neovim
-    vimPlugins.LazyVim
-    gcc # syntax hightling
-    ripgrep
-    fd
-    tree-sitter
     #language server
     nil # für Nix
     nixd
@@ -244,7 +244,7 @@
     zed-editor
     fish
     kitty
-    bitwarden-cli
+
     mission-center
     #gaming
     faugus-launcher
@@ -257,7 +257,7 @@
     nvd # Nix Version Diff
     #----------------
     fastfetch
-
+    pinta # drawing
     #Hyprland
     waybar
     rofi
