@@ -201,11 +201,8 @@
     ];
   };
 
-  #my Sql
-  services.mysql = {
-    enable = true;
-    package = pkgs.mysql84;
-  };
+  #my Sql gehört in eine eingen flake.nix
+
   #aktiver appimages
   programs.appimage = {
     enable = true;

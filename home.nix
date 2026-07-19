@@ -89,10 +89,27 @@
     gnomeExtensions.quick-settings-audio-panel
     kora-icon-theme
   ];
+  home.pointerCursor = {
+    enable = true;
+    gtk.enable = true;
+    x11.enable = true;
 
+    package = pkgs.vimix-cursors;
+    name = "vimix-cursors";
+    size = 24;
+  };
+  wayland.windowManager.hyprland.settings = {
+    env = [
+      "XCURSOR_THEME,Vimix-cursors"
+      "XCURSOR_SIZE,24"
+    ];
+  };
   dconf.enable = true;
 
   dconf.settings = {
+
+
+
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
 
@@ -225,14 +242,8 @@
     };
 
   };
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
 
-    package = pkgs.bibata-cursors;
-    name = "vimix-cursors";
-    size = 24;
-  };
+
   programs.waybar = {
     enable = true;
 
