@@ -225,7 +225,7 @@
     nixd
     #uni
     remnote
-    mysql-workbench
+
     jetbrains.webstorm
     jetbrains.pycharm
 

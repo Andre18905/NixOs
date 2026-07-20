@@ -95,8 +95,12 @@
     x11.enable = true;
 
     package = pkgs.vimix-cursors;
-    name = "vimix-cursors";
+    name = "Vimix-cursors";
     size = 24;
+  };
+  home.sessionVariables = {
+    XCURSOR_THEME = "Vimix-cursors";
+    XCURSOR_SIZE = "24";
   };
   wayland.windowManager.hyprland.settings = {
     env = [
