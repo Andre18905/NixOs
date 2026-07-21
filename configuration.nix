@@ -126,10 +126,12 @@
     ];
   };
 
+  services.desktopManager.cosmic.enable = true;
+
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
+  #programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
 
   # Configure keymap in X11
   services.xserver.xkb = {

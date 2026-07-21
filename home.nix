@@ -42,7 +42,7 @@
         separator = ": ";
       };
       logo = {
-        source = "nixos_medium";
+        source = "nixos_large";
         padding = {
           right = 1;
         };
@@ -65,6 +65,7 @@
         "kernel"
         "uptime"
         "shell"
+        "de"
         "terminal"
         "packages"
         "break" # Leerzeile
