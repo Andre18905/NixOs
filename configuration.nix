@@ -127,9 +127,27 @@
   };
 
   services.desktopManager.cosmic.enable = true;
-
+  environment.cosmic.excludePackages = with pkgs; [
+    cosmic-edit
+    cosmic-files
+    cosmic-store
+    cosmic-term
+    cosmic-player
+    cosmic-reader
+    cosmic-screenshot
+    cosmic-monitor
+  ];
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  environment.gnome.excludePackages = with pkgs; [
+      gnome-tour
+      gnome-maps
+      gnome-terminal
+      gnome-console
+      gnome-contacts
+      gnome-notes
+      gnome-text-editor
+  ];
 
   #programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
 
@@ -249,6 +267,7 @@
     faugus-launcher
     steam
     protonplus
+
     #discord
 
     gamescope
