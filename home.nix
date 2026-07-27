@@ -88,6 +88,7 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.blur-my-shell
     gnomeExtensions.quick-settings-audio-panel
+
     kora-icon-theme
   ];
   home.pointerCursor = {
@@ -147,7 +148,7 @@
     };
 
     "org/gnome/shell/extensions/blur-my-shell/applications" = {
-      blur = true;
+      blur = false;
       corner-when-maximized = true;
       pipeline = "pipeline_default";
     };

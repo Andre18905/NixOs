@@ -147,6 +147,7 @@
       gnome-contacts
       gnome-notes
       gnome-text-editor
+
   ];
 
   #programs.ssh.askPassword = lib.mkForce "${pkgs.seahorse}/libexec/seahorse/ssh-askpass";
@@ -221,6 +222,7 @@
     ];
   };
 
+
   #my Sql gehört in eine eingen flake.nix
 
   #aktiver appimages
@@ -235,7 +237,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wge
+    wget
     git
 
     #neovim confi sachen
