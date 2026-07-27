@@ -125,7 +125,7 @@
       pkgs.xdg-desktop-portal-gtk
     ];
   };
-
+  services.desktopManager.cosmic.showExcludedPkgsWarning = false;
   services.desktopManager.cosmic.enable = true;
   environment.cosmic.excludePackages = with pkgs; [
     cosmic-edit

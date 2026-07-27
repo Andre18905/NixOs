@@ -15,6 +15,8 @@
       btw = "echo i use nixos btw ";
       nrs = "sudo nixos-rebuild build --flake /etc/nixos#nixos-btw && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
       update-all = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild build --flake . && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake .";
+      #löscht alle alte genaration Spart Platz durch Deduplizierung identischer Dateien
+      clean-up ="sudo nix-collect-garbage -d && nix store optimise";
     };
     interactiveShellInit = ''
       set -g fish_greeting "" # Schaltet die Begrüßung aus
