@@ -16,24 +16,24 @@
       nrs = "sudo nixos-rebuild build --flake /etc/nixos#nixos-btw && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake /etc/nixos#nixos-btw --show-trace";
       update-all = "cd /etc/nixos && sudo nix flake update && sudo nixos-rebuild build --flake . && nvd diff /run/current-system ./result && sudo nixos-rebuild switch --flake .";
       #löscht alle alte genaration Spart Platz durch Deduplizierung identischer Dateien
-      clean-up ="sudo nix-collect-garbage -d && nix store optimise";
+      clean-up = "sudo nix-collect-garbage -d && nix store optimise";
     };
     interactiveShellInit = ''
       set -g fish_greeting "" # Schaltet die Begrüßung aus
       fastfetch
     '';
   };
+
   programs.kitty = lib.mkForce {
     enable = true;
     settings = {
-      font_size = 13;
-      hide_window_decorations = true;
+        font_size = 13;
+        hide_window_decorations = true;
 
-      background_opacity = "0.3"; # Transparenz (0.0 bis 1.0)
-      dynamic_background_opacity = true; # Erlaubt dynamische Änderung
-      background_blur = 0; # Der Unschärfe-Grad (je nach Compositor)
-      window_padding_width = 15; # Mehr Platz für den "Glas"-Effekt
+        background_opacity = "0.85";
+        background_blur = 3;
 
+        window_padding_width = 15;
     };
   };
 
