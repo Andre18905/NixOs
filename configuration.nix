@@ -51,7 +51,10 @@
     "nvidia_drm.fbdev=1"
     "usbcore.autosuspend=-1"
   ];
+  # /etc/nixos/configuration.nix
 
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true; # Optional GUI for managing Bluetooth
   services.power-profiles-daemon.enable = true;
   systemd.services.set-performance-mode = {
     description = "Set power profile to performance";
@@ -270,6 +273,7 @@
     #gnome
 
     #für flatpak
+    vscode
 
     appimage-run
     spotify
@@ -285,8 +289,7 @@
     faugus-launcher
     steam
     protonplus
-
-    #discord
+    libdisplay-info
 
     gamescope
     # cured forge als app img

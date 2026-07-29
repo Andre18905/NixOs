@@ -19,8 +19,11 @@
       clean-up = "sudo nix-collect-garbage -d && nix store optimise";
     };
     interactiveShellInit = ''
+
       set -g fish_greeting "" # Schaltet die Begrüßung aus
+       if not contains "$TERM_PROGRAM" vscode zed #nur fastfetch wenn ich das terminl so öffne
       fastfetch
+    end
     '';
   };
 
@@ -30,7 +33,7 @@
         font_size = 13;
         hide_window_decorations = true;
 
-        background_opacity = "0.85";
+        background_opacity = "0.3";
         background_blur = 3;
 
         window_padding_width = 15;
