@@ -43,7 +43,8 @@
     powerManagement.enable = true;
     powerManagement.finegrained = false;
   };
-
+  #das iphone geht
+  services.usbmuxd.enable =true;
   # "nvidia.NVreg_EnableGpuFirmware=0"
   boot.kernelParams = [
     "mem_sleep_default=s2idle"
@@ -83,7 +84,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   networking.hostName = "nixos-btw"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -119,7 +120,7 @@
   # Enable the  Desktop Environment.
   programs.niri.enable = true;
   programs.dms-shell = {
-    enable = true;
+    enable = false;
 
     systemd = {
       enable = true;             # Systemd service for auto-start
@@ -134,13 +135,14 @@
     enableCalendarEvents = true;       # Calendar integration (khal)
   };
   programs.hyprland = {
-    enable = true;
+    enable = false;
     xwayland.enable = true;
   };
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gnome
+      #pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
   };
@@ -166,6 +168,10 @@
       gnome-contacts
       gnome-notes
       gnome-text-editor
+      gnome-manuals
+      epiphany
+      seahorse
+
 
   ];
 
@@ -289,14 +295,15 @@
     faugus-launcher
     steam
     protonplus
-    libdisplay-info
+
 
     gamescope
     # cured forge als app img
     nvd # Nix Version Diff
+    proton-pass
     #----------------
     fastfetch
-    pinta # drawing
+    pinta # paint
     #Hyprland
     waybar
     rofi

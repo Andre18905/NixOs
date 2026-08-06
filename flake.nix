@@ -38,7 +38,7 @@
             nixpkgs.overlays = [
               (final: prev: {
                 #niri auf stable machen
-                #niri = nixpkgs-stable.legacyPackages.x86_64-linux.niri;
+                niri = nixpkgs-stable.legacyPackages.x86_64-linux.niri;
               })
             ];
             home-manager.useGlobalPkgs = true;
