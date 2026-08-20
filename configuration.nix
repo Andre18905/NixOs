@@ -118,15 +118,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the  Desktop Environment.
-
-    # Core features
-    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableVPN = true;                  # VPN management widget
-    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true;      # Audio visualizer (cava)
-    enableCalendarEvents = true;       # Calendar integration (khal)
-  };
+  
  
   xdg.portal = {
     enable = true;
@@ -275,7 +267,7 @@
     appimage-run
     spotify
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-    caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
+   
     localsend
     gnome-tweaks
     zed-editor

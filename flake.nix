@@ -27,7 +27,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit zen-browser caelestia-shell;
+          inherit zen-browser;
         };
         modules = [
           ./configuration.nix
