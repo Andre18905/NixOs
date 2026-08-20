@@ -27,7 +27,7 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit zen-browser;
+          inherit zen-browser caelestia-shell;
         };
         modules = [
           ./configuration.nix
@@ -35,10 +35,12 @@
           home-manager.nixosModules.home-manager
 
           {
+
             nixpkgs.overlays = [
               (final: prev: {
                 #niri auf stable machen
                 niri = nixpkgs-stable.legacyPackages.x86_64-linux.niri;
+
               })
             ];
             home-manager.useGlobalPkgs = true;

@@ -6,6 +6,7 @@
   #config,
   pkgs,
   zen-browser,
+  caelestia-shell,
   lib,
   ...
 }:
@@ -84,7 +85,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos-btw"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -118,14 +119,6 @@
   services.xserver.enable = true;
 
   # Enable the  Desktop Environment.
-  programs.niri.enable = true;
-  programs.dms-shell = {
-    enable = false;
-
-    systemd = {
-      enable = true;             # Systemd service for auto-start
-      restartIfChanged = true;   # Auto-restart dms.service when dms-shell changes
-    };
 
     # Core features
     enableSystemMonitoring = true;     # System monitoring widgets (dgop)
@@ -134,15 +127,12 @@
     enableAudioWavelength = true;      # Audio visualizer (cava)
     enableCalendarEvents = true;       # Calendar integration (khal)
   };
-  programs.hyprland = {
-    enable = false;
-    xwayland.enable = true;
-  };
+ 
   xdg.portal = {
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gnome
-      #pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
   };
@@ -273,8 +263,9 @@
     #uni
     remnote
 
-    jetbrains.webstorm
-    jetbrains.pycharm
+
+
+    jetbrains.dataspell
 
     #gnome
 
@@ -284,18 +275,21 @@
     appimage-run
     spotify
     zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    caelestia-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
     localsend
     gnome-tweaks
     zed-editor
     fish
     kitty
 
+
+
     mission-center
     #gaming
     faugus-launcher
     steam
-    protonplus
-
+   
+    uv
 
     gamescope
     # cured forge als app img
@@ -305,8 +299,7 @@
     fastfetch
     pinta # paint
     #Hyprland
-    waybar
-    rofi
+    
     hyprpaper
     hyprlock
     hypridle

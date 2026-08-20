@@ -6,6 +6,7 @@
 }:
 
 {
+
   home.username = "andre";
   home.homeDirectory = "/home/andre";
   home.stateVersion = "26.05";
@@ -108,6 +109,7 @@
   home.sessionVariables = {
     XCURSOR_THEME = "Vimix-cursors";
     XCURSOR_SIZE = "24";
+    ADW_DEBUG_COLOR_SCHEME = "prefer-dark";
   };
   wayland.windowManager.hyprland.settings = {
     env = [
@@ -115,6 +117,27 @@
       "XCURSOR_SIZE,24"
     ];
   };
+
+  gtk = {
+    enable = true;
+
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+  };
+
+
+
+
   dconf.enable = true;
 
   dconf.settings = {
