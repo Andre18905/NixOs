@@ -96,7 +96,7 @@
     User = "andre";
 
     ExecStart = "${pkgs.bash}/bin/bash -c ''
-      sleep 5m
+      sleep 1m
       cd /etc/nixos
       nix flake update
       nixos-rebuild build --flake .
