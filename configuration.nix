@@ -92,7 +92,7 @@
 
   serviceConfig = {
     Type = "oneshot";
-    ExecStart = "/bin/sh -c 'sleep 1m && update-all'";
+    ExecStart = "/bin/sh -lc 'sleep 1m && update-all'";
   };
 };
 
