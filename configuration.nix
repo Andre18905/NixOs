@@ -83,6 +83,18 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  
+  #nach den start wird gupdatet
+  systemd.services.update-all = {
+  description = "Update all nach Systemstart";
+  after = [ "network-online.target" ];
+  wants = [ "network-online.target" ];
+
+  serviceConfig = {
+    Type = "oneshot";
+    ExecStart = "/bin/sh -c 'sleep 1m && update-all'";
+  };
+};
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
