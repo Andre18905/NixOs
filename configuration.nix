@@ -86,15 +86,26 @@
   
   #nach den start wird gupdatet
   systemd.services.update-all = {
-  description = "Update all nach Systemstart";
+  description = "NixOS Update nach Systemstart";
+
   after = [ "network-online.target" ];
   wants = [ "network-online.target" ];
 
   serviceConfig = {
     Type = "oneshot";
-    ExecStart = "/bin/sh -lc 'sleep 1m && update-all'";
+    User = "andre";
+
+    ExecStart = "${pkgs.bash}/bin/bash -c ''
+      sleep 5m
+      cd /etc/nixos
+      nix flake update
+      nixos-rebuild build --flake .
+      nvd diff /run/current-system ./result
+      nixos-rebuild switch --flake .
+    ''";
   };
 };
+
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
