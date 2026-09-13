@@ -4,22 +4,26 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url= "github:NixOS/nixpkgs/nixos-25.11";
-    zen-browser.url = "github:youwen5/zen-browser-flake";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
 
     };
     declarative-flatpak.url = "github:gmodena/nix-flatpak";
+    nix-software-center = {
+      url = "github:snowfallorg/nix-software-center";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs =
     {
       self,
       nixpkgs,
-      zen-browser,
       home-manager,
       declarative-flatpak,
       nixpkgs-stable,
+      nix-software-center,
       ...
     }:
     {
@@ -27,7 +31,8 @@
         system = "x86_64-linux";
 
         specialArgs = {
-          inherit zen-browser;
+         
+          inherit nix-software-center;
         };
         modules = [
           ./configuration.nix

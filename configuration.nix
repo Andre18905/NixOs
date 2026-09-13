@@ -5,9 +5,9 @@
 {
   #config,
   pkgs,
-  zen-browser,
   caelestia-shell,
   lib,
+  nix-software-center,
   ...
 }:
 
@@ -83,7 +83,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
   #nach den start wird gupdatet
   systemd.services.update-all = {
   description = "NixOS Update nach Systemstart";
@@ -141,8 +141,8 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  
- 
+
+
   xdg.portal = {
     enable = true;
     extraPortals = [
@@ -249,6 +249,7 @@
       "com.discordapp.Discord"
       "it.mijorus.gearlever"
       "org.onlyoffice.desktopeditors"
+      "app.zen_browser.zen"
     ];
   };
 
@@ -286,11 +287,10 @@
 
     #für flatpak
     vscode
-
+    vscodium
     appimage-run
     spotify
-    zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-   
+    nix-software-center.packages.${pkgs.stdenv.hostPlatform.system}.nix-software-center
     localsend
     gnome-tweaks
     zed-editor
@@ -303,7 +303,7 @@
     #gaming
     faugus-launcher
     steam
-   
+
     uv
 
     gamescope
@@ -314,13 +314,14 @@
     fastfetch
     pinta # paint
     #Hyprland
-    
+
     hyprpaper
     hyprlock
     hypridle
     #fonts
     nerd-fonts.jetbrains-mono
     font-awesome
+    firefox
   ];
   #neo vim
   #gaming
