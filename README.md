@@ -1,1 +1,1 @@
-# hardware-configuration.nix nicht auf github speichern
+# hardware-configuration.nix änder 
